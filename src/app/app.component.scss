@@ -9,7 +9,7 @@
   padding: 0 0px;
 }
 
-.logo-content {
+.top-bar {
   z-index: 1;
   position: fixed;
   display: flex;
@@ -19,7 +19,7 @@
   font-family: "Dancing Script", cursive;
 }
 
-.logo-content:before {
+.top-bar:before {
   content: "";
   position: fixed;
   z-index: 0;
@@ -31,7 +31,7 @@
   box-shadow: 0 2px 10px;
 }
 
-.logo-content-welcome {
+#top-bar-welcome {
   z-index: 1;
   user-select: none;
   display: flex;
@@ -44,7 +44,7 @@
   color: black;
 }
 
-.logo-content-title {
+#top-bar-title {
   z-index: 1;
   user-select: none;
   width: 60%;
@@ -54,7 +54,7 @@
   color: black;
 }
 
-.logo-content-new-list {
+#top-bar-add-list {
   z-index: 1;
   display: flex;
   justify-content: space-around;
@@ -63,7 +63,7 @@
   padding-top: 1vi;
 }
 
-.btn-new-list {
+#btn-add-list {
   user-select: none;
   display: flex;
   align-items: center;
@@ -77,7 +77,7 @@
   color: black;
 }
 
-.btn-new-list:hover {
+#btn-add-list:hover {
   transition: all 0.3s ease-in-out;
   transform: scale(1.15);
 }
