@@ -1,7 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
-* {
+html {
+  height: 150vh;
+  width: 100%;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+}
+
+body {
+  height: 150vh;
+  width: 100%;
+  margin: 0;
+  background-image: url(./assets/images/background-image.jpg);
+  background-size: cover;
 }
