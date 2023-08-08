@@ -1,0 +1,16 @@
+<link
+  href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;500&display=swap"
+  rel="stylesheet"
+/>
+
+<mat-toolbar class="top-bar">
+  <div id="top-bar-welcome">Hi, Andrei</div>
+  <div id="top-bar-title">Task Manager</div>
+  <div id="top-bar-add-list">
+    <button type="button" id="btn-add-list" (click)="addNewList()">
+      <a class="plus-icon"></a>
+      <a>Add a list</a>
+    </button>
+  </div>
+  <div #listComponent></div>
+</mat-toolbar>
