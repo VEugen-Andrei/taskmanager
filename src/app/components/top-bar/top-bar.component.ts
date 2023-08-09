@@ -1,12 +1,5 @@
-import {
-  Component,
-  ComponentFactoryResolver,
-  ViewContainerRef,
-  ViewChild,
-  OnInit,
-} from '@angular/core';
-
-import { ListComponent } from '../list/list.component';
+import { Component, OnInit } from '@angular/core';
+import { ListItemButtonService } from 'src/app/shared/list-item-button.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -14,19 +7,10 @@ import { ListComponent } from '../list/list.component';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit {
-  newList: any[] = [];
-  @ViewChild('listComponent', { read: ViewContainerRef })
-  viewContainerRef!: ViewContainerRef;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
+  constructor(private listItemButtonService: ListItemButtonService) {}
 
-  addNewList() {
-    const componentFactory =
-      this.componentFactoryResolver.resolveComponentFactory(ListComponent);
-    const componentRef = componentFactory.create(
-      this.viewContainerRef.injector
-    );
-    this.newList.push(componentRef);
-    console.log('created new list');
+  addListItem() {
+    this.listItemButtonService.listItemButtonEvent();
   }
 
   ngOnInit() {}
