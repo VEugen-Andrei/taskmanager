@@ -3,15 +3,19 @@
   flex-direction: column;
   align-items: flex-start;
   // background-color: rgb(190, 190, 190);
-  color: white;
+  //color: white;
   width: 50%;
 }
 
 .list-item-title {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .task-table {
   background-color: rgb(34, 31, 31);
+  color: white;
+}
+
+.mat-column-title {
   color: white;
 }

@@ -3,9 +3,9 @@
     <input matInput type="text" [(ngModel)]="listContainerTitle" />
   </mat-form-field>
 
-  <mat-table class="task-table" [dataSource]="dataSource">
+  <mat-table class="task-table" [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef>no.</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>no.</mat-header-cell>
       <mat-cell *matCellDef="let task">{{ task.position }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="title">
@@ -17,11 +17,15 @@
       <mat-cell *matCellDef="let task">{{ task.description }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="priority">
-      <mat-header-cell *matHeaderCellDef>Priority</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Priority</mat-header-cell
+      >
       <mat-cell *matCellDef="let task">{{ task.priority }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header
+        >Status</mat-header-cell
+      >
       <mat-cell *matCellDef="let task">{{ task.status }}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
