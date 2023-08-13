@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
 
 export interface TaskTable {
   position: number;
@@ -23,7 +22,7 @@ const taskTable: TaskTable[] = [
     title: 'food',
     description: 'food',
     priority: 'low',
-    status: 'done',
+    status: 'pending',
   },
   {
     position: 3,
@@ -37,7 +36,7 @@ const taskTable: TaskTable[] = [
     title: 'food',
     description: 'food',
     priority: 'high',
-    status: 'done',
+    status: 'pending',
   },
 ];
 
@@ -46,7 +45,7 @@ const taskTable: TaskTable[] = [
   templateUrl: './list-item.component.html',
   styleUrls: ['./list-item.component.scss'],
 })
-export class ListItemComponent implements AfterViewInit {
+export class ListItemComponent {
   @Input() taskTable: TaskTable[] = [];
   listContainerTitle = '';
 
@@ -63,9 +62,4 @@ export class ListItemComponent implements AfterViewInit {
   constructor() {}
 
   @ViewChild(MatTable) table: MatTable<TaskTable> | undefined;
-  //@ViewChild(MatSort) sort: MatSort;
-
-  ngAfterViewInit() {
-    //this.dataSource.sort = this.sort;
-  }
 }

@@ -1,11 +1,14 @@
 <div #check class="list-item-container">
-  <mat-form-field class="list-item-title">
-    <input matInput type="text" [(ngModel)]="listContainerTitle" />
-  </mat-form-field>
-
-  <mat-table class="task-table" [dataSource]="dataSource" matSort>
+  <div class="task-table-header">
+    <mat-form-field class="list-item-title">
+      <input matInput type="text" [(ngModel)]="listContainerTitle" />
+    </mat-form-field>
+    <button mat-raised-button class="task-table-button">DELETE LIST</button>
+    <button mat-raised-button class="task-table-button">ADD TASK</button>
+  </div>
+  <mat-table class="task-table" [dataSource]="dataSource">
     <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>no.</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>no.</mat-header-cell>
       <mat-cell *matCellDef="let task">{{ task.position }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="title">
@@ -17,15 +20,11 @@
       <mat-cell *matCellDef="let task">{{ task.description }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="priority">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Priority</mat-header-cell
-      >
+      <mat-header-cell *matHeaderCellDef>Priority</mat-header-cell>
       <mat-cell *matCellDef="let task">{{ task.priority }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef mat-sort-header
-        >Status</mat-header-cell
-      >
+      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
       <mat-cell *matCellDef="let task">{{ task.status }}</mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
