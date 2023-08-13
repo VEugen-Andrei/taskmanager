@@ -1,0 +1,17 @@
+.list-item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  // background-color: rgb(190, 190, 190);
+  color: white;
+  width: 50%;
+}
+
+.list-item-title {
+  color: white;
+}
+
+.task-table {
+  background-color: rgb(34, 31, 31);
+  color: white;
+}

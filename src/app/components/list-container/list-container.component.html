@@ -1,7 +1,13 @@
-<div id="list-container">
-  <mat-grid-list cols="1" rowHeight="3:1">
+<mat-card id="list-container">
+  <mat-card-content id="task-table" *ngFor="let listItem of listItems">
+    <app-list-item #appListItem [taskTable]="listItem"></app-list-item>
+  </mat-card-content>
+</mat-card>
+
+<!-- <div id="list-container">
+<mat-grid-list cols="1" rowHeight="fit" gutterSize="100px">
     <mat-grid-tile *ngFor="let listItem of listItems">
-      <app-list-item [itemListData]="listItem"></app-list-item>
+      <app-list-item #appListItem [taskTable]="listItem"></app-list-item>
     </mat-grid-tile>
   </mat-grid-list>
-</div>
+</div> -->
