@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { ListItemComponent } from './components/list-item/list-item.component';
-import { ListContainerComponent } from './components/list-container/list-container.component';
+import { ProjectComponent } from './components/project/project.component';
+import { ProjectContainerComponent } from './components/project-container/project-container.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -20,13 +20,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    ListContainerComponent,
-    ListItemComponent,
+    ProjectContainerComponent,
+    ProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     MatSortModule,
     BrowserAnimationsModule,
+    MatSelectModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

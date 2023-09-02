@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListItemButtonService } from 'src/app/shared/list-item-button.service';
+import { ProjectButtonService } from 'src/app/shared/project-button.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,10 +7,10 @@ import { ListItemButtonService } from 'src/app/shared/list-item-button.service';
   styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit {
-  constructor(private listItemButtonService: ListItemButtonService) {}
+  constructor(private projectButtonService: ProjectButtonService) {}
 
-  addListItem() {
-    this.listItemButtonService.listItemButtonEvent();
+  addProject() {
+    this.projectButtonService.projectButtonEvent();
   }
 
   ngOnInit() {}

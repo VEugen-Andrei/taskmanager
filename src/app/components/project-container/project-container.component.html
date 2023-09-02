@@ -1,0 +1,8 @@
+<mat-card id="project-container">
+  <mat-card-content id="project" *ngFor="let project of projectList">
+    <app-project #appListItem [taskTableList]="project"></app-project>
+  </mat-card-content>
+  <mat-card-content id="project">
+    <app-project></app-project>
+  </mat-card-content>
+</mat-card>
