@@ -20,6 +20,10 @@ export class ApiService {
     return this.http.get(this.apiUrl + 'project/all');
   }
 
+  getProjectById(id: number): Observable<any> {
+    return this.http.get(this.apiUrl + 'project/' + id);
+  }
+
   createTask(data: any): Observable<any> {
     return this.http.post(this.apiUrl + 'task', data);
   }
@@ -28,7 +32,7 @@ export class ApiService {
     return this.http.delete(this.apiUrl + 'task/' + id);
   }
 
-  getAllTasks(): Observable<any> {
-    return this.http.get(this.apiUrl + 'task?projectId=1');
+  showTasksByProjectId(projectId: number) {
+    return this.http.get(this.apiUrl + 'task?projectId=' + projectId);
   }
 }

@@ -1,10 +1,7 @@
 <mat-card id="project-container">
-  <mat-card-content id="project">
-    <ng-container *ngFor="let projects of projectList">
-      <app-project [projectList]="projects"></app-project>
-    </ng-container>
-  </mat-card-content>
-  <!-- <mat-card-content id="project">
-    <app-project></app-project>
-  </mat-card-content> -->
+  <ng-container *ngFor="let project of projectList; let i; of: index">
+    <mat-card-content id="project">
+      <app-project [project]="project"></app-project>
+    </mat-card-content>
+  </ng-container>
 </mat-card>

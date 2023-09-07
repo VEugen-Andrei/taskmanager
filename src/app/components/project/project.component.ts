@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 
 export interface Project {
@@ -14,7 +14,8 @@ export interface Task {
   description: string;
   priority: string;
   status: string;
-  task_table_id: number;
+  isEdit: boolean;
+  projectId: number;
 }
 
 const COLUMN_TABLE = [
@@ -32,13 +33,13 @@ const COLUMN_TABLE = [
     key: 'priority',
     type: 'dropdown',
     label: 'Priority',
-    options: ['High', 'Medium', 'Low'],
+    options: ['HIGH', 'MEDIUM', 'LOW'],
   },
   {
     key: 'status',
     type: 'dropdown',
     label: 'Status',
-    options: ['In Progress', 'Done'],
+    options: ['PENDING', 'DONE'],
   },
   {
     key: 'isEdit',
@@ -53,67 +54,76 @@ const COLUMN_TABLE = [
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  projectTitle = '';
-  @Input() taskList: Task[] = [];
-  @Input() projectList: Project[] = [];
-  @ViewChild(MatTable) table!: MatTable<Task>;
-
-  displayedColumns: string[] = COLUMN_TABLE.map((column) => column.key);
+  @Input() project!: Project;
+  projectTitle: string = '';
+  taskList: Task[] = [];
+  newlyCreatedTasks: Task[] = [];
   dataSource!: MatTableDataSource<Task>;
+  displayedColumns: string[] = COLUMN_TABLE.map((column) => column.key);
   columnTable: any = COLUMN_TABLE;
 
-  constructor(private apiService: ApiService, private httpClient: HttpClient) {}
+  constructor(
+    private apiService: ApiService,
+    private httpClient: HttpClient,
+    private cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.apiService.getAllProjects().subscribe((data: Project[]) => {
-      this.projectList = data;
-      // for (const project of this.projectList) {
-      //   this.projectTitle = project.title;
-      // }
-      this.apiService.getAllTasks().subscribe((data: Task[]) => {
-        this.taskList = data;
-        this.dataSource = new MatTableDataSource<Task>(this.taskList);
-      });
-    });
+    if (this.project && this.project.id) {
+      this.loadTaskForProject(this.project.id);
+    }
   }
 
-  addTask() {
-    const newTask = {
-      title: '',
-      description: '',
-      priority: '',
-      status: '',
-      isEdit: true,
-    };
-    this.apiService.createTask(newTask).subscribe(
-      (createdTask: Task) => {
-        this.dataSource.data.unshift(createdTask);
-        this.table.renderRows();
+  loadTaskForProject(projectId: number): void {
+    this.apiService.showTasksByProjectId(projectId).subscribe(
+      (taskData: any) => {
+        this.taskList = taskData;
+        this.dataSource = new MatTableDataSource<Task>(this.taskList);
       },
       (error) => {
-        console.error('Error creating task:', error);
+        console.error('Error fetching tasks for the project', error);
       }
     );
   }
 
-  removeTask(id: any) {
-    this.apiService.deleteTaskById(id).subscribe(() => {
-      this.dataSource.data = this.dataSource.data.filter(
-        (task) => task.id !== id
+  deleteTask(id: number) {
+    const taskToRemove = this.dataSource.data.find((task) => task.id === id);
+    if (taskToRemove) {
+      this.apiService.deleteTaskById(id).subscribe(
+        () => {
+          this.dataSource.data = this.dataSource.data.filter(
+            (task) => task.id !== id
+          );
+          this.dataSource._updateChangeSubscription();
+        },
+        (error) => {
+          console.error(`Error deleting task with ID ${id}:`, error);
+        }
       );
-      this.table.renderRows();
-    });
-    // http DELETE request spre backend
+    }
+  }
 
-    // Response response = httpClient.delete("localhost:8080/api/task/" + id)
-
-    // if(Response.status == 200) {
-    //   this.dataSource.data = this.dataSource.data.filter(
-    //     (task: { id: any }) => task.id !== id
-    //   );
-    //   else {
-    // afisati un mesaj de eroare in frontend
-    //   }
-    // }
+  addTask() {
+    const newTask: any = {
+      projectId: this.project.id,
+      title: '',
+      description: '',
+      priority: 'LOW',
+      status: 'PENDING',
+    };
+    this.newlyCreatedTasks.push(newTask);
+    this.apiService.createTask(newTask).subscribe(
+      (createdTask: Task) => {
+        newTask.id = createdTask.id;
+        this.dataSource.data.push(newTask);
+        this.dataSource._updateChangeSubscription();
+      },
+      (error) => {
+        console.error('Error creating task:', error);
+        this.newlyCreatedTasks = this.newlyCreatedTasks.filter(
+          (task) => task !== newTask
+        );
+      }
+    );
   }
 }
