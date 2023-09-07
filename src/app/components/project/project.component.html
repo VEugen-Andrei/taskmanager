@@ -3,14 +3,10 @@
   rel="stylesheet"
 />
 
-<mat-card
-  #check
-  class="project__container"
-  *ngFor="let tableSource of tableSource; let i = index"
->
+<mat-card #check class="project__container">
   <div class="header">
     <mat-form-field class="header__title" appearance="outline" color="warn">
-      <input matInput type="text" [(ngModel)]="projectContainerTitle" />
+      <input matInput type="text" [(ngModel)]="projectTitle" />
     </mat-form-field>
     <div class="header__btn">
       <button mat-raised-button color="accent" (click)="addTask()">

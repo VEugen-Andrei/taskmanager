@@ -3,12 +3,12 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 
-export interface Table {
+export interface Project {
   id: number;
   title: string;
 }
 
-export interface TaskTable {
+export interface Task {
   id: number;
   title: string;
   description: string;
@@ -53,25 +53,27 @@ const COLUMN_TABLE = [
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  projectContainerTitle = '';
-  @Input() taskTableList: TaskTable[] = [];
-  @Input() tableSource: any[] = [];
-  @ViewChild(MatTable) table!: MatTable<TaskTable>;
+  projectTitle = '';
+  @Input() taskList: Task[] = [];
+  @Input() projectList: Project[] = [];
+  @ViewChild(MatTable) table!: MatTable<Task>;
 
   displayedColumns: string[] = COLUMN_TABLE.map((column) => column.key);
-  dataSource!: MatTableDataSource<TaskTable>;
+  dataSource!: MatTableDataSource<Task>;
   columnTable: any = COLUMN_TABLE;
 
   constructor(private apiService: ApiService, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.apiService.getAllProjects().subscribe((data: any) => {
-      this.tableSource = data;
-    });
-
-    this.apiService.getAllTasks().subscribe((data: TaskTable[]) => {
-      this.taskTableList = data;
-      this.dataSource = new MatTableDataSource<TaskTable>(this.taskTableList);
+    this.apiService.getAllProjects().subscribe((data: Project[]) => {
+      this.projectList = data;
+      // for (const project of this.projectList) {
+      //   this.projectTitle = project.title;
+      // }
+      this.apiService.getAllTasks().subscribe((data: Task[]) => {
+        this.taskList = data;
+        this.dataSource = new MatTableDataSource<Task>(this.taskList);
+      });
     });
   }
 
@@ -84,7 +86,7 @@ export class ProjectComponent implements OnInit {
       isEdit: true,
     };
     this.apiService.createTask(newTask).subscribe(
-      (createdTask: TaskTable) => {
+      (createdTask: Task) => {
         this.dataSource.data.unshift(createdTask);
         this.table.renderRows();
       },
