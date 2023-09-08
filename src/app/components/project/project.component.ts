@@ -69,7 +69,6 @@ export class ProjectComponent implements OnInit {
   displayedColumns: string[] = COLUMN_TABLE.map((column) => column.key);
   columnTable: any = COLUMN_TABLE;
 
-  isInputReadOnly: boolean = false;
   @Output() projectDeleted = new EventEmitter<number>();
 
   constructor(
@@ -145,7 +144,6 @@ export class ProjectComponent implements OnInit {
         .subscribe(
           () => {
             console.log('Project title updated successfully');
-            this.isInputReadOnly = true;
           },
           (error) => {
             console.error('Error updating project title:', error);
@@ -164,5 +162,20 @@ export class ProjectComponent implements OnInit {
         console.error('Error deleting the project', error);
       }
     );
+  }
+
+  updateTask(task: Task) {
+    const { title, description, priority, status } = task;
+    this.apiService
+      .updateTask(task.id, { title, description, priority, status })
+      .subscribe(
+        () => {
+          console.log('Task was updated successfully');
+          task.isEdit = false;
+        },
+        (error) => {
+          console.error('Error updating task:', error);
+        }
+      );
   }
 }

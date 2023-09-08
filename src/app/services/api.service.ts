@@ -37,4 +37,8 @@ export class ApiService {
   showTasksByProjectId(projectId: number) {
     return this.http.get(this.apiUrl + 'task?projectId=' + projectId);
   }
+
+  updateTask(id: number, data: any) {
+    return this.http.put(this.apiUrl + 'task/' + id, data);
+  }
 }
