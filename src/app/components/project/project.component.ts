@@ -1,5 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -62,6 +69,9 @@ export class ProjectComponent implements OnInit {
   displayedColumns: string[] = COLUMN_TABLE.map((column) => column.key);
   columnTable: any = COLUMN_TABLE;
 
+  isInputReadOnly: boolean = false;
+  @Output() projectDeleted = new EventEmitter<number>();
+
   constructor(
     private apiService: ApiService,
     private httpClient: HttpClient,
@@ -71,6 +81,7 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     if (this.project && this.project.id) {
       this.loadTaskForProject(this.project.id);
+      this.projectTitle = this.project.title;
     }
   }
 
@@ -84,23 +95,6 @@ export class ProjectComponent implements OnInit {
         console.error('Error fetching tasks for the project', error);
       }
     );
-  }
-
-  deleteTask(id: number) {
-    const taskToRemove = this.dataSource.data.find((task) => task.id === id);
-    if (taskToRemove) {
-      this.apiService.deleteTaskById(id).subscribe(
-        () => {
-          this.dataSource.data = this.dataSource.data.filter(
-            (task) => task.id !== id
-          );
-          this.dataSource._updateChangeSubscription();
-        },
-        (error) => {
-          console.error(`Error deleting task with ID ${id}:`, error);
-        }
-      );
-    }
   }
 
   addTask() {
@@ -123,6 +117,51 @@ export class ProjectComponent implements OnInit {
         this.newlyCreatedTasks = this.newlyCreatedTasks.filter(
           (task) => task !== newTask
         );
+      }
+    );
+  }
+
+  deleteTask(id: number) {
+    const taskToRemove = this.dataSource.data.find((task) => task.id === id);
+    if (taskToRemove) {
+      this.apiService.deleteTaskById(id).subscribe(
+        () => {
+          this.dataSource.data = this.dataSource.data.filter(
+            (task) => task.id !== id
+          );
+          this.dataSource._updateChangeSubscription();
+        },
+        (error) => {
+          console.error(`Error deleting task with ID ${id}:`, error);
+        }
+      );
+    }
+  }
+
+  updateProjectTitleOnEnter() {
+    if (this.project && this.project.id) {
+      this.apiService
+        .updateProjectTitle(this.project.id, this.projectTitle)
+        .subscribe(
+          () => {
+            console.log('Project title updated successfully');
+            this.isInputReadOnly = true;
+          },
+          (error) => {
+            console.error('Error updating project title:', error);
+          }
+        );
+    }
+  }
+
+  deleteProject(projectId: number): void {
+    this.apiService.deleteProjectById(projectId).subscribe(
+      () => {
+        console.log('Project deleted successfully');
+        this.projectDeleted.emit(projectId);
+      },
+      (error) => {
+        console.error('Error deleting the project', error);
       }
     );
   }

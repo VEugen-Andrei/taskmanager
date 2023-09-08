@@ -1,7 +1,10 @@
 <mat-card id="project-container">
   <ng-container *ngFor="let project of projectList; let i; of: index">
     <mat-card-content id="project">
-      <app-project [project]="project"></app-project>
+      <app-project
+        [project]="project"
+        (projectDeleted)="onProjectDeleted($event)"
+      ></app-project>
     </mat-card-content>
   </ng-container>
 </mat-card>

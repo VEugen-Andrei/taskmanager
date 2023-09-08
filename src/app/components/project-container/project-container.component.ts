@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { ProjectButtonService } from 'src/app/shared/project-button.service';
@@ -17,14 +23,15 @@ export class ProjectContainerComponent implements OnDestroy, OnInit {
   index: [] = [];
   projectList: Project[] = [];
   private subscription: Subscription;
+  newlyCreatedProject: Project[] = [];
 
   constructor(
     private projectButtonService: ProjectButtonService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private cd: ChangeDetectorRef
   ) {
     this.subscription = this.projectButtonService.buttonEvent$.subscribe(() => {
-      const projectRequest = '';
-      this.addProject(projectRequest);
+      this.addProject();
     });
   }
   ngOnInit(): void {
@@ -35,15 +42,40 @@ export class ProjectContainerComponent implements OnDestroy, OnInit {
     });
   }
 
-  addProject(projectRequest: any) {
-    this.apiService.createProject(projectRequest).subscribe(
-      (response) => {
+  addProject() {
+    const newProject: any = {
+      title: 'New Project',
+    };
+    this.newlyCreatedProject.push(newProject);
+    this.apiService.createProject(newProject).subscribe(
+      (response: Project) => {
         console.log('Project created successfully:', response);
+        this.newlyCreatedProject = this.newlyCreatedProject.filter(
+          (project) => project.id !== 0
+        );
+        this.projectList.push(response);
+        this.cd.detectChanges();
       },
       (error) => {
         console.error('Error creating project:', error);
+        this.newlyCreatedProject = this.newlyCreatedProject.filter(
+          (project) => project.id !== 0
+        );
       }
     );
+  }
+
+  onProjectDeleted(deletedProjectId: number): void {
+    this.projectList = this.projectList.filter(
+      (project) => project.id !== deletedProjectId
+    );
+    const indexToRemove = this.newlyCreatedProject.findIndex(
+      (project) => project.id === deletedProjectId
+    );
+
+    if (indexToRemove !== -1) {
+      this.newlyCreatedProject.splice(indexToRemove, 1);
+    }
   }
 
   ngOnDestroy() {

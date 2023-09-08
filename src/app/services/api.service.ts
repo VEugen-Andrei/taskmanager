@@ -13,15 +13,17 @@ export class ApiService {
     return this.http.post(this.apiUrl + 'project', data);
   }
 
-  // deleteProjectById
-  // updateProjectTitle
+  deleteProjectById(id: number): Observable<any> {
+    return this.http.delete(this.apiUrl + 'project/' + id);
+  }
+
+  updateProjectTitle(id: number, title: string): Observable<any> {
+    const body = { title: title };
+    return this.http.patch(this.apiUrl + 'project/' + id, body);
+  }
 
   getAllProjects(): Observable<any> {
     return this.http.get(this.apiUrl + 'project/all');
-  }
-
-  getProjectById(id: number): Observable<any> {
-    return this.http.get(this.apiUrl + 'project/' + id);
   }
 
   createTask(data: any): Observable<any> {

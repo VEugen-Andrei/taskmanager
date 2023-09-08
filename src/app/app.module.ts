@@ -47,6 +47,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatSelectModule,
     HttpClientModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

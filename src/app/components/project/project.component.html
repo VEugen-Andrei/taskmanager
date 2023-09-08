@@ -6,13 +6,24 @@
 <mat-card #check class="project__container">
   <div class="header">
     <mat-form-field class="header__title" appearance="outline" color="warn">
-      <input matInput type="text" [(ngModel)]="projectTitle" />
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="projectTitle"
+        (keyup.enter)="updateProjectTitleOnEnter()"
+      />
     </mat-form-field>
     <div class="header__btn">
       <button mat-raised-button color="accent" (click)="addTask()">
         Add Task
       </button>
-      <button mat-raised-button color="warn">Delete</button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="deleteProject(project.id)"
+      >
+        Delete
+      </button>
     </div>
   </div>
   <table mat-table [dataSource]="dataSource">
