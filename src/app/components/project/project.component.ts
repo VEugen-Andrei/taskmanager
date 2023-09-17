@@ -61,21 +61,17 @@ const COLUMN_TABLE = [
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-  @Input() project!: Project;
+  displayedColumns: string[] = COLUMN_TABLE.map((column) => column.key);
+  columnTable: any = COLUMN_TABLE;
   projectTitle: string = '';
   taskList: Task[] = [];
   newlyCreatedTasks: Task[] = [];
   dataSource!: MatTableDataSource<Task>;
-  displayedColumns: string[] = COLUMN_TABLE.map((column) => column.key);
-  columnTable: any = COLUMN_TABLE;
 
+  @Input() project!: Project;
   @Output() projectDeleted = new EventEmitter<number>();
 
-  constructor(
-    private apiService: ApiService,
-    private httpClient: HttpClient,
-    private cdRef: ChangeDetectorRef
-  ) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     if (this.project && this.project.id) {

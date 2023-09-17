@@ -1,10 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { ProjectButtonService } from 'src/app/shared/project-button.service';
@@ -22,8 +16,8 @@ export interface Project {
 export class ProjectContainerComponent implements OnDestroy, OnInit {
   index: [] = [];
   projectList: Project[] = [];
-  private subscription: Subscription;
   newlyCreatedProject: Project[] = [];
+  private subscription: Subscription;
 
   constructor(
     private projectButtonService: ProjectButtonService,
