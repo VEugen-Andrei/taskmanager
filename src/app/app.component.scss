@@ -5,9 +5,16 @@
   width: 100%;
 }
 
-.app-top-bar,
-.app-list-container {
+.app-top-bar {
   flex: 1;
   padding: 10px;
   border: 1px solid #ccc;
+}
+
+.content {
+  flex-shrink: 1;
+  flex-grow: 1;
+  padding: 3px 5px;
+  position: relative;
+  overflow-y: auto;
 }

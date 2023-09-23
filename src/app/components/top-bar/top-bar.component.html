@@ -4,7 +4,13 @@
 />
 
 <mat-toolbar class="top-bar">
-  <div id="top-bar__welcome">Hi, Andrei</div>
+  <div id="top-bar__welcome">
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+    <a routerLink="/register" routerLinkActive="active">Register</a>
+    <a routerLink="/project-container" routerLinkActive="active"
+      >Project Container</a
+    >
+  </div>
   <div id="top-bar__title">Task Manager</div>
   <div id="top-bar__btn">
     <button type="button" id="btn--add-project" (click)="addProject()">
