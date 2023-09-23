@@ -19,7 +19,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 20%;
+  width: 30%;
   padding-top: 1vb;
   font-weight: 900;
   font-size: 5vb;
@@ -28,7 +28,7 @@
 #top-bar__title {
   z-index: 2;
   user-select: none;
-  width: 60%;
+  width: 50%;
   text-align: center;
   font-size: 6vb;
   font-weight: 600;
@@ -43,7 +43,7 @@
   padding-top: 1vb;
 }
 
-#btn--add-project {
+.btn--add-project {
   user-select: none;
   display: flex;
   align-items: center;
@@ -56,7 +56,7 @@
   color: white;
 }
 
-#btn--add-project:hover {
+.btn--add-project:hover {
   transition: all 0.3s ease-in-out;
   transform: scale(1.15);
 }

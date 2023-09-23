@@ -1,15 +1,21 @@
 .card.card-container {
-  padding-top: 50px;
+  padding: 200px;
   border: none;
   display: flex;
   align-items: center;
-}
-
-#profile-img {
-  width: 200px;
-  height: 200px;
+  display: flex;
 }
 
 .register-form {
   width: 30%;
+}
+
+.col-md-12 {
+  background: var(--mat-toolbar-container-background-color);
+}
+
+.card {
+  height: 94vb;
+  background-color: var(--mat-toolbar-container-background-color);
+  color: white;
 }

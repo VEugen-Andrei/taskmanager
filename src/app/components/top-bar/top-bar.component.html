@@ -5,15 +5,34 @@
 
 <mat-toolbar class="top-bar">
   <div id="top-bar__welcome">
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-    <a routerLink="/register" routerLinkActive="active">Register</a>
-    <a routerLink="/project-container" routerLinkActive="active"
-      >Project Container</a
+    <button
+      type="button"
+      class="btn--add-project"
+      routerLink="/login"
+      routerLinkActive="active"
     >
+      Login
+    </button>
+    <button
+      type="button"
+      class="btn--add-project"
+      routerLink="/register"
+      routerLinkActive="active"
+    >
+      Register
+    </button>
+    <button
+      type="button"
+      class="btn--add-project"
+      routerLink="/project-container"
+      routerLinkActive="active"
+    >
+      Container
+    </button>
   </div>
   <div id="top-bar__title">Task Manager</div>
   <div id="top-bar__btn">
-    <button type="button" id="btn--add-project" (click)="addProject()">
+    <button type="button" class="btn--add-project" (click)="addProject()">
       Add a project
     </button>
   </div>
