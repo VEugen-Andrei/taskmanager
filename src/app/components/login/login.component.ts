@@ -20,6 +20,19 @@ export class LoginComponent {
   constructor(private http: HttpClient) {}
 
   onSubmit(): void {
-    this.http.post(this.url, this.form);
+    this.http.post(this.url, this.form).subscribe(
+      (response) => {
+        // Handle successful login response here (e.g., store the authentication token).
+        this.isLoggedIn = true;
+        this.isLoginFailed = false;
+        this.errorMessage = '';
+      },
+      (error) => {
+        // Handle error response here (e.g., display an error message).
+        this.isLoggedIn = false;
+        this.isLoginFailed = true;
+        this.errorMessage = 'Login failed. Please check your credentials.';
+      }
+    );
   }
 }

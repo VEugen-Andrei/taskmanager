@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("project")
+@RequestMapping("/api/project")
 public class ProjectController {
 
     private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
@@ -70,7 +70,7 @@ public class ProjectController {
         return ResponseEntity.ok(projectService.showAllProjects());
     }
 
-  @GetMapping
+  @GetMapping()
   public ResponseEntity<?> showProjectsByUserId(@RequestParam("userId") Long userId) {
     try {
       logger.info("Received all projects get request for user id: {}", userId);

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("task")
+@RequestMapping("/api/task")
 public class TaskController {
 
     private static final Logger logger = LoggerFactory.getLogger(TaskController.class);

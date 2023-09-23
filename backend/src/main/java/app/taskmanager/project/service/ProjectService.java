@@ -32,9 +32,9 @@ public class ProjectService {
   }
 
   public ProjectResponse createProject(ProjectRequest projectRequest) {
-    if (projectRepository.existsByTitle(projectRequest.getTitle())) {
-      throw new DuplicateDataException("Title already exists");
-    }
+//    if (projectRepository.existsByTitle(projectRequest.getTitle())) {
+//      throw new DuplicateDataException("Title already exists");
+//    }
 
     Optional<User> optionalUser = userRepository.findById(projectRequest.getUserId());
 

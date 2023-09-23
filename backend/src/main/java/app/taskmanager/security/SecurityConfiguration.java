@@ -29,7 +29,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 //
 //                .addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class)
       .csrf(csrf -> csrf.disable())
-      .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/auth/**", "/api/users/**", "/project/**", "/task/**").permitAll().anyRequest().authenticated())
+      .authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/auth/**", "/api/users/**", "/api/**", "/project-container/**").permitAll().anyRequest().authenticated())
       .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authenticationProvider(authenticationProvider)
       .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
