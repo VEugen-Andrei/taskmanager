@@ -4,6 +4,8 @@ import app.taskmanager.project.repository.Project;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,9 +13,9 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-@Entity(name = "user")
+@Entity
 @Table(
-  name = "_user",
+  name = "users",
   uniqueConstraints = {
     @UniqueConstraint(name = "user_email_unique", columnNames = "email")
   }
@@ -24,7 +26,7 @@ import java.util.List;
 @ToString
 public class User implements UserDetails {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false, updatable = false)
   private Long id;
   @Column(name = "first_name", nullable = false, columnDefinition = "TEXT")
@@ -37,8 +39,9 @@ public class User implements UserDetails {
   @Email
   private String email;
 
-  @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.EAGER)
-  private List<Project> projects;
+  @OneToMany(mappedBy = "user")
+  @Cascade(CascadeType.ALL)
+  List<Project> projectList;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

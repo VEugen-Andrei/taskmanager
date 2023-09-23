@@ -26,6 +26,10 @@ export class ApiService {
     return this.http.get(this.apiUrl + 'project/all');
   }
 
+  getProjectsByUserId(userId: number): Observable<any> {
+    return this.http.get(this.apiUrl + 'project?userId=' + userId);
+  }
+
   createTask(data: any): Observable<any> {
     return this.http.post(this.apiUrl + 'task', data);
   }

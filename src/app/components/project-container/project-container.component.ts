@@ -29,7 +29,8 @@ export class ProjectContainerComponent implements OnDestroy, OnInit {
     });
   }
   ngOnInit(): void {
-    this.apiService.getAllProjects().subscribe((data: Project[]) => {
+    const userId = 1; // THIS IS HARD CODED. MUST BE MODIFIED AFTER IMPLEMENTING LOGIN !!!!!!!!!!!!!!!!!!!!!! --------------------------------------------------
+    this.apiService.getProjectsByUserId(userId).subscribe((data: Project[]) => {
       this.projectList = [];
       this.projectList = data;
       console.log(this.projectList);
@@ -39,6 +40,7 @@ export class ProjectContainerComponent implements OnDestroy, OnInit {
   addProject() {
     const newProject: any = {
       title: 'New Project',
+      userId: 1, // THIS IS HARD CODED. MUST BE MODIFIED AFTER IMPLEMENTING LOGIN !!!!!!!!!!!!!!!!!!!!!! --------------------------------------------------
     };
     this.newlyCreatedProject.push(newProject);
     this.apiService.createProject(newProject).subscribe(

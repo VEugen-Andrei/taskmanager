@@ -69,4 +69,17 @@ public class ProjectController {
         logger.info("Received all projects get request");
         return ResponseEntity.ok(projectService.showAllProjects());
     }
+
+  @GetMapping
+  public ResponseEntity<?> showProjectsByUserId(@RequestParam("userId") Long userId) {
+    try {
+      logger.info("Received all projects get request for user id: {}", userId);
+      return ResponseEntity.ok(projectService.showProjectsByUserId(userId));
+    } catch (NotFoundException e) {
+      ErrorResponse errorResponse = new ErrorResponse();
+      errorResponse.setErrorCode(ErrorResponse.CLIENT_ERROR_CODE);
+      errorResponse.setErrorMessage("Data was not found");
+      return new ResponseEntity<>(errorResponse, HttpStatusCode.valueOf(HttpStatus.NOT_FOUND.value()));
+    }
+  }
 }

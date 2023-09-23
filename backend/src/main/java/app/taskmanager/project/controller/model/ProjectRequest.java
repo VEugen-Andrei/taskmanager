@@ -13,6 +13,7 @@ public class ProjectRequest {
 
     private static final Gson gson = new Gson();
 
+    private Long userId;
     @Pattern(regexp = "^.{1,50}$")
     private String title;
 

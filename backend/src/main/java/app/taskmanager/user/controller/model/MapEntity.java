@@ -9,7 +9,7 @@ public class MapEntity {
     initialUser.setLastName(user.getLastName());
     initialUser.setPassword(user.getPassword());
     initialUser.setEmail(user.getEmail());
-    initialUser.setProjects(user.getProjects());
+    //initialUser.setProjectList(user.getProjectList());
   }
 
   public static void mapUserToUserDto(User user, UserDto userDTO) {
@@ -18,6 +18,6 @@ public class MapEntity {
     userDTO.setLastName(user.getLastName());
     userDTO.setPassword(user.getPassword());
     userDTO.setEmail(user.getEmail());
-    userDTO.setProjects(user.getProjects());
+    //userDTO.setProjects(user.getProjectList());
   }
 }
