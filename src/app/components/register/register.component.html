@@ -3,7 +3,7 @@
     <form
       *ngIf="!isSuccessful"
       name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
+      (ngSubmit)="f.form.valid && onSubmit($event.target)"
       #f="ngForm"
       novalidate
       class="register-form"

@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { LocalStorageService } from 'src/app/services/localstorage.service';
+
+export interface AuthenticationResponse {
+  token: string;
+  id: number;
+}
 
 @Component({
   selector: 'app-login',
@@ -17,22 +25,34 @@ export class LoginComponent {
 
   private url: string = 'https://localhost:443/api/v1/auth/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) {}
 
+  // onSubmit(): void {
+  //   this.authService.login(this.form.email, this.form.password).subscribe({
+  //     next: (data: AuthenticationResponse) => {
+  //       console.log(data);
+  //       this.localStorageService.saveUser(data.token);
+  //       this.router.navigate(['/project']).then(() => window.location.reload());
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
   onSubmit(): void {
-    this.http.post(this.url, this.form).subscribe(
-      (response) => {
-        // Handle successful login response here (e.g., store the authentication token).
-        this.isLoggedIn = true;
-        this.isLoginFailed = false;
-        this.errorMessage = '';
+    this.authService.login(this.form.email, this.form.password).subscribe({
+      next: (data: AuthenticationResponse) => {
+        console.log(data);
+        this.localStorageService.saveUser(data);
+        this.router.navigate(['/project']).then(() => window.location.reload());
       },
-      (error) => {
-        // Handle error response here (e.g., display an error message).
-        this.isLoggedIn = false;
-        this.isLoginFailed = true;
-        this.errorMessage = 'Login failed. Please check your credentials.';
-      }
-    );
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

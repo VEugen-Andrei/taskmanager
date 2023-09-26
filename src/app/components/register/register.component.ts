@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -20,13 +21,12 @@ export class RegisterComponent {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {}
 
-  onSubmit() {
-    // return this.http.post(this.url, this.form)
-    // .pipe(
-    //   catchError(this.handleError)
-    // );
+  onSubmit(source: any) {
     this.authenticationService
       .register(
         this.form.firstName,
@@ -37,12 +37,14 @@ export class RegisterComponent {
       .subscribe({
         next: (data) => {
           console.log(data);
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1500);
         },
         error: (err) => {
           console.log(err);
         },
       });
-    // console.log(this.form);
   }
 
   private handleError(error: HttpErrorResponse) {
