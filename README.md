@@ -1,3 +1,5 @@
+![project-page](https://github.com/VEugen-Andrei/taskmanager/assets/12787736/be78b715-f4f3-42ea-bd7d-c1f41a4baff5)
+
 # TaskManager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
