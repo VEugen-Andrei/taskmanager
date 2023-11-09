@@ -19,17 +19,6 @@ export interface AuthenticationResponse {
 export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
-  // login(email: string, password: string): Observable<any> {
-  //   return this.http.post(
-  //     AUTH_API + 'login',
-  //     {
-  //       email,
-  //       password,
-  //     },
-  //     httpOptions
-  //   );
-  // }
-
   login(email: string, password: string): Observable<AuthenticationResponse> {
     return this.http.post<AuthenticationResponse>(
       AUTH_API + 'login',

@@ -52,7 +52,7 @@ export class ProjectContainerComponent implements OnDestroy, OnInit {
     const userData = this.localStorageService.getUser();
     const newProject: any = {
       title: 'New Project',
-      userId: userData?.id, // THIS IS HARD CODED. MUST BE MODIFIED AFTER IMPLEMENTING LOGIN !!!!!!!!!!!!!!!!!!!!!! --------------------------------------------------
+      userId: userData?.id,
     };
     this.newlyCreatedProject.push(newProject);
     this.apiService.createProject(newProject).subscribe(

@@ -8,14 +8,6 @@ const USER_KEY = 'auth-user';
 export class LocalStorageService {
   constructor() {}
 
-  // public saveUser(token: string) {
-  //   localStorage.setItem(USER_KEY, token);
-  // }
-
-  // public getUser() {
-  //   return localStorage.getItem(USER_KEY);
-  // }
-
   public saveUser(user: { token: string; id: number }) {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
     console.log(user);

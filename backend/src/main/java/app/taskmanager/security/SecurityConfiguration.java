@@ -19,10 +19,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration implements WebMvcConfigurer {
+
   private final JwtAuthenticationFilter jwtAuthenticationFilter;
   private final AuthenticationProvider authenticationProvider;
 
-//  "/api/project/**", "/api/task/**"
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http

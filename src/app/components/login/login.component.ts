@@ -31,18 +31,6 @@ export class LoginComponent {
     private localStorageService: LocalStorageService
   ) {}
 
-  // onSubmit(): void {
-  //   this.authService.login(this.form.email, this.form.password).subscribe({
-  //     next: (data: AuthenticationResponse) => {
-  //       console.log(data);
-  //       this.localStorageService.saveUser(data.token);
-  //       this.router.navigate(['/project']).then(() => window.location.reload());
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
   onSubmit(): void {
     this.authService.login(this.form.email, this.form.password).subscribe({
       next: (data: AuthenticationResponse) => {
