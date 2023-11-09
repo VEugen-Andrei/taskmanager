@@ -1,27 +1,49 @@
-# TaskManager
+# Task Manager Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+![project-page](https://github.com/VEugen-Andrei/taskmanager/assets/12787736/be78b715-f4f3-42ea-bd7d-c1f41a4baff5)
 
-## Development server
+## Introduction:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+If you are looking to stay organized, this Task Manager Application will empowers you to take control of your projects and tasks with ease, allowing you to focus on what matters most.
 
-## Code scaffolding
+## Running Application:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Clone `https://github.com/VEugen-Andrei/taskmanager.git`
 
-## Build
+Run `npm install @angular/cli` and `ng serve` for a dev server.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Running unit tests
+For the backend Java code, you need to open `backend` folder and run the application.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Features:
 
-## Running end-to-end tests
+### User Registration:
+Sign up for an account to access your personalized task management dashboard.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Login/Logout:
+Securely log in and out of your account to keep your tasks and projects private.
 
-## Further help
+### Project Creation:
+Create new projects to organize your tasks. Edit title of project or delete project entirely.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Task Management:
+Add, edit, and delete tasks within your projects, keeping your to-do lists up-to-date.
+
+#### Create Task:
+Allows the user to add a task with the following criteria:
+- Title
+- Description
+- Priority
+- Status
+
+## Development
+In the development of this project, I utilized the following programming technologies:
+- Spring
+- Spring Security
+- JSON Web Token
+- PostgreSQL
+- Hibernate
+- Lombok
+- Angular
+- Angular Material
