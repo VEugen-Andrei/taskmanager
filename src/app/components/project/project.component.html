@@ -31,12 +31,10 @@
       [matColumnDef]="column.key"
       *ngFor="let column of columnTable"
     >
-      <th mat-header-cell *matHeaderCellDef>
-        {{ column.label }}
-      </th>
+      <th mat-header-cell *matHeaderCellDef>{{ column.label }}</th>
       <td mat-cell *matCellDef="let element">
         <div [ngSwitch]="column.type" *ngIf="!element.isEdit">
-          <div *ngSwitchCase="'isEdit'">
+          <div class="isEdit-buttons" *ngSwitchCase="'isEdit'">
             <button
               mat-raised-button
               color="accent"
@@ -52,12 +50,10 @@
               Delete
             </button>
           </div>
-          <span *ngSwitchDefault>
-            {{ element[column.key] }}
-          </span>
+          <span *ngSwitchDefault>{{ element[column.key] }}</span>
         </div>
         <div [ngSwitch]="column.type" *ngIf="element.isEdit">
-          <div *ngSwitchCase="'isEdit'">
+          <div class="isEdit-buttons" *ngSwitchCase="'isEdit'">
             <button
               class="btn--done"
               mat-raised-button
@@ -76,9 +72,8 @@
               <mat-option
                 *ngFor="let option of column.options"
                 [value]="option"
+                >{{ option }}</mat-option
               >
-                {{ option }}
-              </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field appearance="outline" color="warn" *ngSwitchDefault>

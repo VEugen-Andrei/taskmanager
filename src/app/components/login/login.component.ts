@@ -23,8 +23,6 @@ export class LoginComponent {
   isLoginFailed = false;
   errorMessage = '';
 
-  private url: string = 'https://localhost:443/api/v1/auth/login';
-
   constructor(
     private authService: AuthenticationService,
     private router: Router,

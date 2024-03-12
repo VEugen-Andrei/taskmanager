@@ -1,5 +1,5 @@
 .card.card-container {
-  padding: 200px;
+  padding-top: 30vh;
   border: none;
   display: flex;
   align-items: center;
@@ -12,10 +12,11 @@
 
 .col-md-12 {
   background: var(--mat-toolbar-container-background-color);
+  height: 100vh;
 }
 
 .card {
-  height: 94vb;
+  height: 100vh;
   background-color: var(--mat-toolbar-container-background-color);
   color: white;
 }
